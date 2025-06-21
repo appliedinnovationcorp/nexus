@@ -21,7 +21,7 @@ interface Product {
   updatedAt: string;
 }
 
-export default function HomePage() {
+export default function HomePage(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);

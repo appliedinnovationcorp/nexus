@@ -617,7 +617,7 @@ export default function AuthPage() {
             <div className="flex items-center space-x-3">
               <input type="checkbox" id="remember-me" defaultChecked className="rounded" />
               <label htmlFor="remember-me" className="text-sm font-medium">
-                Allow "Remember Me" option
+                Allow &quot;Remember Me&quot; option
               </label>
             </div>
           </CardContent>
