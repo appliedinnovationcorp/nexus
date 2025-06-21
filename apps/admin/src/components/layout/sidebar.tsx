@@ -19,8 +19,8 @@ const navigation = [
   { name: "Users", href: "/users", icon: Users },
   { name: "Organizations", href: "/organizations", icon: Building2 },
   { name: "Projects", href: "/projects", icon: FolderOpen },
-  { name: "Reports", href: "/reports", icon: BarChart3 },
   { name: "Content", href: "/content", icon: FileText },
+  { name: "Reports", href: "/reports", icon: BarChart3 },
   { name: "Permissions", href: "/permissions", icon: Shield },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
@@ -37,7 +37,7 @@ export function Sidebar() {
       <nav className="flex-1 px-4 py-6 space-y-2">
         {navigation.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           
           return (
             <Link
