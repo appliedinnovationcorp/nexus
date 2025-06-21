@@ -12,10 +12,18 @@ import {
   BarChart3,
   FileText,
   Shield,
+  Database,
+  HardDrive,
+  Zap,
+  Key,
 } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
+  { name: "Authentication", href: "/auth", icon: Key },
+  { name: "Database", href: "/database", icon: Database },
+  { name: "Storage", href: "/storage", icon: HardDrive },
+  { name: "Functions", href: "/functions", icon: Zap },
   { name: "Users", href: "/users", icon: Users },
   { name: "Organizations", href: "/organizations", icon: Building2 },
   { name: "Projects", href: "/projects", icon: FolderOpen },
@@ -31,10 +39,10 @@ export function Sidebar() {
   return (
     <div className="flex flex-col w-64 bg-white shadow-lg">
       <div className="flex items-center justify-center h-16 px-4 bg-blue-600">
-        <h1 className="text-xl font-bold text-white">Nexus Admin</h1>
+        <h1 className="text-xl font-bold text-white">Nexus Platform</h1>
       </div>
       
-      <nav className="flex-1 px-4 py-6 space-y-2">
+      <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
         {navigation.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
