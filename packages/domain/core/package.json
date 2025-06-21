@@ -1,0 +1,18 @@
+{
+  "name": "@nexus/domain-core",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@nexus/typescript-config": "workspace:*",
+    "typescript": "5.8.2"
+  }
+}
