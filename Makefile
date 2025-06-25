@@ -115,6 +115,15 @@ db-backup: ## Backup development database
 	@echo "✅ Database backup completed!"
 
 # Development Tools
+install-apps: ## Install dependencies for apps only (skip problematic services)
+	@echo "📦 Installing app dependencies only..."
+	@cd apps/web && pnpm install
+	@cd apps/admin && pnpm install
+	@cd apps/ai-tools && pnpm install
+	@cd apps/client-portal && pnpm install
+	@cd apps/docs && pnpm install
+	@echo "✅ App dependencies installed!"
+
 install: ## Install dependencies for all applications
 	@echo "📦 Installing dependencies..."
 	@pnpm install
@@ -162,6 +171,14 @@ setup-complete: setup-env generate-secrets ## Complete setup: create env files a
 	@echo "🎉 Complete setup finished!"
 	@echo "📝 Add your API keys to the environment files"
 	@echo "🚀 Run 'make dev' to start development"
+
+quick-start-apps: setup-complete install-apps ## Quick start: setup and install apps only (skip services)
+	@echo ""
+	@echo "🎉 Apps setup complete!"
+	@echo "🚀 Start individual apps with:"
+	@echo "   cd apps/web && pnpm dev"
+	@echo "   cd apps/ai-tools && pnpm dev"
+	@echo "   cd apps/admin && pnpm dev"
 
 quick-start: setup-complete install build dev ## Quick start: complete setup, install, build, and run
 	@echo ""
