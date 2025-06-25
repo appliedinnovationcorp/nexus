@@ -32,7 +32,6 @@
     "express-rate-limit": "^7.4.1",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
-    "snyk": "^1.1293.1",
     "retire": "^5.2.4",
     "eslint-plugin-security": "^3.0.1",
     "sonarjs": "^1.0.0",
