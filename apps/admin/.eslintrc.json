@@ -1,5 +1,6 @@
 {
-  "extends": ["next/core-web-vitals"],
+  "extends": ["@nexus/eslint-config/next"],
+  "root": true,
   "rules": {
     "react/no-unescaped-entities": "off"
   }

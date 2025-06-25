@@ -31,7 +31,7 @@
     "@opentelemetry/instrumentation-mongodb": "^0.47.0",
     "@opentelemetry/instrumentation-redis": "^0.42.0",
     "elastic-apm-node": "^4.7.3",
-    "datadog-lambda-js": "^8.131.0",
+    "datadog-lambda-js": "^11.126.0",
     "newrelic": "^12.5.1",
     "uuid": "^10.0.0",
     "zod": "^3.23.8"
