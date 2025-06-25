@@ -87,8 +87,8 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app
 app = FastAPI(
-    title="AIC Synergy - AI Model Management Service",
-    description="AI model management microservice for AIC Synergy platform",
+    title="AIC Nexus - AI Model Management Service",
+    description="AI model management microservice for AIC Nexus platform",
     version="1.0.0",
     lifespan=lifespan
 )

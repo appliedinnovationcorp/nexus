@@ -79,6 +79,8 @@ export async function createUser(data: CreateUserData): Promise<User> {
   const newUser: User = {
     id: (mockUsers.length + 1).toString(),
     ...data,
+    role: data.role || 'user',
+    status: data.status || 'active',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };

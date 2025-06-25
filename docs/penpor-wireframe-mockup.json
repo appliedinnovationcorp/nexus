@@ -1,0 +1,172 @@
+{
+  "project": {
+    "id": "f7b2a9c3-8e4d-4f8b-b2c9-7d4f9e2a3c1e",
+    "name": "AIConsultCo UI/UX Designs",
+    "created_at": "2025-07-14",
+    "description": "Wireframes and prototypes for Marketing Website and Client Portal"
+  },
+  "pages": [
+    {
+      "id": "marketing-homepage",
+      "name": "Marketing Site - Homepage",
+      "inspiration": "https://markovate.com",
+      "layout": {
+        "header": {
+          "components": [
+            {
+              "type": "logo",
+              "position": "top-left",
+              "dimensions": { "width": 150, "height": 50 },
+              "style": "Tailwind: text-blue-900 font-bold"
+            },
+            {
+              "type": "nav-bar",
+              "items": ["Home", "Services", "Blog", "Case Studies", "Contact"],
+              "position": "top-right",
+              "style": "Tailwind: text-gray-700 hover:text-blue-600, light/dark toggle"
+            }
+          ]
+        },
+        "hero": {
+          "components": [
+            {
+              "type": "headline",
+              "text": "Transform Your Business with AI",
+              "style": "Tailwind: text-5xl font-bold text-blue-900 dark:text-white",
+              "animation": "fade-in"
+            },
+            {
+              "type": "cta-button",
+              "text": "Get Started",
+              "link": "/signup",
+              "style": "Tailwind: bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700"
+            },
+            {
+              "type": "image",
+              "src": "ai-illustration.png",
+              "dimensions": { "width": 600, "height": 400 },
+              "position": "right"
+            }
+          ],
+          "style": "Tailwind: bg-gradient-to-r from-blue-50 to-teal-50 dark:from-gray-800 dark:to-gray-900"
+        },
+        "features": {
+          "components": [
+            {
+              "type": "card",
+              "title": "AI Analytics",
+              "description": "Predict trends with 90% accuracy",
+              "icon": "chart-bar",
+              "style": "Tailwind: bg-white dark:bg-gray-800 shadow-md rounded-lg p-6"
+            },
+            {
+              "type": "card",
+              "title": "Workflow Automation",
+              "description": "Save 50% on repetitive tasks",
+              "icon": "bolt",
+              "style": "Tailwind: bg-white dark:bg-gray-800 shadow-md rounded-lg p-6"
+            }
+          ]
+        },
+        "footer": {
+          "components": [
+            {
+              "type": "links",
+              "items": ["Privacy Policy", "Terms", "Contact"],
+              "style": "Tailwind: text-gray-600 dark:text-gray-400"
+            },
+            {
+              "type": "social-icons",
+              "platforms": ["LinkedIn", "Twitter", "GitHub"],
+              "style": "Tailwind: text-blue-600 dark:text-blue-400"
+            }
+          ]
+        }
+      },
+      "responsive": {
+        "mobile": {
+          "layout": "stacked",
+          "nav": "hamburger-menu",
+          "hero": "image-below-text"
+        },
+        "tablet": {
+          "layout": "grid-2-columns",
+          "nav": "horizontal"
+        }
+      },
+      "multilingual": ["en", "es", "fr", "de"],
+      "accessibility": "WCAG 2.1 compliant"
+    },
+    {
+      "id": "client-portal-dashboard",
+      "name": "Client Portal - Dashboard",
+      "inspiration": "Supabase/GitHub",
+      "layout": {
+        "sidebar": {
+          "components": [
+            {
+              "type": "nav-menu",
+              "items": ["Dashboard", "Projects", "Teams", "Integrations", "Settings"],
+              "style": "Tailwind: bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300"
+            }
+          ]
+        },
+        "main": {
+          "components": [
+            {
+              "type": "welcome-message",
+              "text": "Hello, {user_name}!",
+              "style": "Tailwind: text-2xl font-semibold text-blue-900 dark:text-white"
+            },
+            {
+              "type": "analytics-widget",
+              "title": "AI Insights",
+              "data": "Predictive analytics (TensorFlow)",
+              "style": "Tailwind: bg-white dark:bg-gray-800 shadow-md rounded-lg p-6"
+            },
+            {
+              "type": "chatbot",
+              "title": "AI Assistant",
+              "provider": "Rasa, client-selected LLM",
+              "style": "Tailwind: fixed bottom-right bg-blue-600 text-white rounded-full p-4"
+            },
+            {
+              "type": "llm-selector",
+              "options": ["Llama", "GPT", "Hugging Face Models"],
+              "style": "Tailwind: bg-white dark:bg-gray-800 dropdown p-4"
+            }
+          ]
+        }
+      },
+      "responsive": {
+        "mobile": {
+          "sidebar": "collapsible",
+          "widgets": "stacked"
+        },
+        "tablet": {
+          "sidebar": "fixed",
+          "widgets": "grid-2-columns"
+        }
+      },
+      "multilingual": ["en", "es", "fr", "de"],
+      "accessibility": "WCAG 2.1 compliant"
+    }
+  ],
+  "design_system": {
+    "typography": {
+      "font": "Inter",
+      "weights": [400, 600, 700],
+      "sizes": ["text-sm", "text-base", "text-xl", "text-5xl"]
+    },
+    "colors": {
+      "primary": "blue-600",
+      "secondary": "teal-500",
+      "background": "white/gray-900 (dark)",
+      "text": "gray-700/white (dark)"
+    },
+    "components": {
+      "button": "Tailwind: bg-blue-600 text-white px-6 py-3 rounded-md",
+      "card": "Tailwind: bg-white dark:bg-gray-800 shadow-md rounded-lg p-6"
+    }
+  }
+}

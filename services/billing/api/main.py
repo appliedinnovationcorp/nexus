@@ -78,8 +78,8 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app
 app = FastAPI(
-    title="AIC Synergy - Billing & Subscription Service",
-    description="Billing and subscription management microservice for AIC Synergy platform",
+    title="AIC Nexus - Billing & Subscription Service",
+    description="Billing and subscription management microservice for AIC Nexus platform",
     version="1.0.0",
     lifespan=lifespan
 )

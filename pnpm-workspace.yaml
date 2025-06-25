@@ -1,6 +1,7 @@
 packages:
   - "apps/*"
-  - "packages/domain/*"
-  - "packages/application/*"
-  - "packages/infrastructure/*"
-  - "packages/shared/*"
+  - "packages/*"
+  - "services/*"
+  - "mobile/*"
+  - "tools"
+  - "tests"
