@@ -23,16 +23,16 @@ nexus/
 
 For basic local development, you only need:
 
-1. **Copy the root environment file:**
+1. **Generate secrets automatically:**
    ```bash
-   cp .env.local.example .env.local  # If it exists
-   # Or use the one we created
+   make generate-secrets
+   # This creates secure NEXTAUTH_SECRET, JWT_SECRET, etc.
    ```
 
-2. **Copy app-specific files:**
+2. **Or set up everything at once:**
    ```bash
-   cp apps/web/.env.local.example apps/web/.env.local
-   cp apps/ai-tools/.env.local.example apps/ai-tools/.env.local
+   make setup-complete
+   # Creates environment files AND generates secrets
    ```
 
 3. **Start with defaults** - Most features will work with mock data
@@ -92,6 +92,48 @@ SENDGRID_API_KEY=your-sendgrid-api-key
 ```
 
 ## 📋 Step-by-Step Setup Instructions
+
+### 0. 🔐 **Generate Secure Secrets (Required First Step)**
+
+Before setting up any services, you need to generate secure secrets:
+
+#### **Method 1: Automated (Recommended)**
+```bash
+# Generate all secrets automatically
+make generate-secrets
+
+# Or complete setup (creates files + generates secrets)
+make setup-complete
+```
+
+#### **Method 2: Manual Generation**
+```bash
+# Using OpenSSL (most secure)
+openssl rand -base64 32
+
+# Using Node.js
+node scripts/generate-secret.js
+
+# Using online generator
+# Visit: https://generate-secret.vercel.app/32
+```
+
+#### **Method 3: Using our Node.js script**
+```bash
+# Generate NEXTAUTH_SECRET
+node scripts/generate-secret.js
+# Output: Jk7+9XqZ8YvN2mR5tA3bC6dE8fG1hI4jK7lM9nO2pQ
+
+# Generate longer JWT secret
+node scripts/generate-secret.js 64
+```
+
+**Add the generated secret to your environment files:**
+```env
+NEXTAUTH_SECRET=Jk7+9XqZ8YvN2mR5tA3bC6dE8fG1hI4jK7lM9nO2pQ
+JWT_SECRET=your-longer-jwt-secret-here
+SESSION_SECRET=your-session-secret-here
+```
 
 ### 1. 🔐 **Authentication Services**
 

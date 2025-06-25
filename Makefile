@@ -153,7 +153,17 @@ setup-env: ## Setup environment files for development
 	@echo "📝 Edit the files to add your API keys and configuration"
 	@echo "📚 See ENVIRONMENT_SETUP_GUIDE.md for detailed instructions"
 
-quick-start: setup-env install build dev ## Quick start: setup env, install, build, and run development environment
+generate-secrets: ## Generate secure secrets for all environment files
+	@echo "🔐 Generating secure secrets..."
+	@./scripts/generate-secrets.sh
+
+setup-complete: setup-env generate-secrets ## Complete setup: create env files and generate secrets
+	@echo ""
+	@echo "🎉 Complete setup finished!"
+	@echo "📝 Add your API keys to the environment files"
+	@echo "🚀 Run 'make dev' to start development"
+
+quick-start: setup-complete install build dev ## Quick start: complete setup, install, build, and run
 	@echo ""
 	@echo "🎉 Nexus Platform is ready!"
 	@echo "=================================="

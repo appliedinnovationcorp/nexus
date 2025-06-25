@@ -120,6 +120,7 @@ SENDGRID_API_KEY=SG.your-sendgrid-api-key
 3. Copy Publishable and Secret keys
 4. For webhooks: Add endpoint https://yourdomain.com/api/webhooks/stripe
 
+
 ### **5. 📧 Gmail SMTP (For Email)**
 1. Enable 2FA on Google account
 2. Go to [Google Account Settings](https://myaccount.google.com/)
