@@ -1,0 +1,148 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: aicsynergy
+      POSTGRES_USER: aicuser
+      POSTGRES_PASSWORD: aicpass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: aicuser
+      MONGO_INITDB_ROOT_PASSWORD: aicpass
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    restart: unless-stopped
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    restart: unless-stopped
+
+  authentication:
+    build:
+      context: .
+      dockerfile: services/authentication/Dockerfile
+    environment:
+      POSTGRES_URL: postgresql://aicuser:aicpass@postgres:5432/aicsynergy
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-change-in-production}
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  client-management:
+    build:
+      context: .
+      dockerfile: services/client-management/Dockerfile
+    environment:
+      POSTGRES_URL: postgresql://aicuser:aicpass@postgres:5432/aicsynergy
+      MONGODB_URL: mongodb://aicuser:aicpass@mongodb:27017
+      KAFKA_SERVERS: kafka:9092
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - mongodb
+      - kafka
+      - redis
+      - authentication
+    restart: unless-stopped
+
+  project-management:
+    build:
+      context: .
+      dockerfile: services/project-management/Dockerfile
+    environment:
+      POSTGRES_URL: postgresql://aicuser:aicpass@postgres:5432/aicsynergy
+      MONGODB_URL: mongodb://aicuser:aicpass@mongodb:27017
+      KAFKA_SERVERS: kafka:9092
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - mongodb
+      - kafka
+      - redis
+      - authentication
+    restart: unless-stopped
+
+  billing:
+    build:
+      context: .
+      dockerfile: services/billing/Dockerfile
+    environment:
+      POSTGRES_URL: postgresql://aicuser:aicpass@postgres:5432/aicsynergy
+      MONGODB_URL: mongodb://aicuser:aicpass@mongodb:27017
+      KAFKA_SERVERS: kafka:9092
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - mongodb
+      - kafka
+      - redis
+      - authentication
+    restart: unless-stopped
+
+  ai-model-management:
+    build:
+      context: .
+      dockerfile: services/ai-model-management/Dockerfile
+    environment:
+      POSTGRES_URL: postgresql://aicuser:aicpass@postgres:5432/aicsynergy
+      MONGODB_URL: mongodb://aicuser:aicpass@mongodb:27017
+      KAFKA_SERVERS: kafka:9092
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - mongodb
+      - kafka
+      - redis
+      - authentication
+    restart: unless-stopped
+
+  nextcloud-integration:
+    build:
+      context: .
+      dockerfile: services/nextcloud-integration/Dockerfile
+    environment:
+      POSTGRES_URL: postgresql://aicuser:aicpass@postgres:5432/aicsynergy
+      MONGODB_URL: mongodb://aicuser:aicpass@mongodb:27017
+      KAFKA_SERVERS: kafka:9092
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - mongodb
+      - kafka
+      - redis
+      - authentication
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  redis_data:

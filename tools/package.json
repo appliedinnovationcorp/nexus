@@ -1,0 +1,60 @@
+{
+  "name": "@nexus/tools",
+  "version": "1.0.0",
+  "description": "Development tools, generators, and scripts for Nexus workspace",
+  "private": true,
+  "scripts": {
+    "dev:setup": "node scripts/setup-dev-environment.js",
+    "dev:clean": "node scripts/clean-workspace.js",
+    "dev:lint": "node scripts/lint-all.js",
+    "dev:test": "node scripts/test-all.js",
+    "dev:build": "node scripts/build-all.js",
+    "generate:app": "node generators/app/generate.js",
+    "generate:package": "node generators/package/generate.js",
+    "generate:component": "node generators/component/generate.js",
+    "generate:service": "node generators/service/generate.js",
+    "generate:api": "node generators/api/generate.js",
+    "deploy:staging": "node scripts/deploy/staging.js",
+    "deploy:production": "node scripts/deploy/production.js",
+    "db:migrate": "node scripts/database/migrate.js",
+    "db:seed": "node scripts/database/seed.js",
+    "db:reset": "node scripts/database/reset.js",
+    "nexus": "node cli/nexus-cli/index.js",
+    "workspace:info": "node scripts/utils/workspace-info.js",
+    "workspace:deps": "node scripts/utils/analyze-dependencies.js",
+    "workspace:health": "node scripts/utils/health-check.js"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "inquirer": "^10.2.2",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.0",
+    "handlebars": "^4.7.8",
+    "ora": "^8.1.0",
+    "semver": "^7.6.3",
+    "execa": "^9.4.0",
+    "listr2": "^8.2.5",
+    "cosmiconfig": "^9.0.0",
+    "dotenv": "^16.4.7",
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^22.10.1",
+    "@types/semver": "^7.5.8",
+    "typescript": "5.8.2"
+  },
+  "bin": {
+    "nexus": "./cli/nexus-cli/index.js"
+  },
+  "keywords": [
+    "nexus",
+    "tools",
+    "generators",
+    "scripts",
+    "development",
+    "monorepo"
+  ]
+}
