@@ -120,7 +120,7 @@ jobs:
         run: pnpm test --if-present
 
       - name: Upload test coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         if: always()
         with:
           directory: ./coverage
