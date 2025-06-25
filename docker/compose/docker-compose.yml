@@ -1,3 +1,7 @@
+# Nexus Platform - Development Environment
+# This compose file sets up the complete development environment
+# Usage: docker-compose -f docker/compose/docker-compose.yml up -d
+
 version: '3.8'
 
 services:
