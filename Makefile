@@ -12,7 +12,7 @@ help: ## Show this help message
 # Development Environment
 dev: ## Start development environment
 	@echo "🚀 Starting development environment..."
-	@docker-compose -f docker/compose/docker-compose.yml up -d
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development up -d
 	@echo "✅ Development environment started!"
 	@echo "🌐 Web App: http://localhost:3000"
 	@echo "📚 Docs: http://localhost:3001"
@@ -20,15 +20,15 @@ dev: ## Start development environment
 
 dev-build: ## Build and start development environment
 	@echo "🔨 Building and starting development environment..."
-	@docker-compose -f docker/compose/docker-compose.yml up -d --build
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development up -d --build
 	@echo "✅ Development environment built and started!"
 
 dev-logs: ## Show development environment logs
-	@docker-compose -f docker/compose/docker-compose.yml logs -f
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development logs -f
 
 dev-stop: ## Stop development environment
 	@echo "🛑 Stopping development environment..."
-	@docker-compose -f docker/compose/docker-compose.yml down
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development down
 	@echo "✅ Development environment stopped!"
 
 # Production Environment
@@ -81,10 +81,10 @@ build-services: ## Build backend services only
 # Utility Commands
 status: ## Show status of all services
 	@echo "📊 Service Status:"
-	@docker-compose -f docker/compose/docker-compose.yml ps
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development ps
 
 logs: ## Show logs for all services
-	@docker-compose -f docker/compose/docker-compose.yml logs -f
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development logs -f
 
 health: ## Run health checks
 	@echo "🏥 Running health checks..."
@@ -105,13 +105,13 @@ clean-all: ## Clean up everything (including images)
 # Database Commands
 db-reset: ## Reset development database
 	@echo "🗄️ Resetting development database..."
-	@docker-compose -f docker/compose/docker-compose.yml exec postgres psql -U postgres -c "DROP DATABASE IF EXISTS nexus_dev;"
-	@docker-compose -f docker/compose/docker-compose.yml exec postgres psql -U postgres -c "CREATE DATABASE nexus_dev;"
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development exec postgres psql -U postgres -c "DROP DATABASE IF EXISTS nexus_dev;"
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development exec postgres psql -U postgres -c "CREATE DATABASE nexus_dev;"
 	@echo "✅ Database reset completed!"
 
 db-backup: ## Backup development database
 	@echo "💾 Backing up development database..."
-	@docker-compose -f docker/compose/docker-compose.yml exec postgres pg_dump -U postgres nexus_dev > backup_$(shell date +%Y%m%d_%H%M%S).sql
+	@docker-compose -f docker/compose/docker-compose.yml --env-file docker/environments/.env.development exec postgres pg_dump -U postgres nexus_dev > backup_$(shell date +%Y%m%d_%H%M%S).sql
 	@echo "✅ Database backup completed!"
 
 # Development Tools
@@ -131,7 +131,29 @@ test: ## Run tests for all applications
 	@echo "✅ Tests completed!"
 
 # Quick Start
-quick-start: install build dev ## Quick start: install, build, and run development environment
+setup-env: ## Setup environment files for development
+	@echo "🔧 Setting up environment files..."
+	@if [ ! -f .env.local ]; then \
+		echo "Creating .env.local..."; \
+		cp .env.local .env.local 2>/dev/null || echo "# Created by make setup-env" > .env.local; \
+	fi
+	@if [ ! -f docker/environments/.env.development ]; then \
+		echo "Creating docker/environments/.env.development..."; \
+		cp docker/environments/.env.example docker/environments/.env.development; \
+	fi
+	@if [ ! -f apps/web/.env.local ]; then \
+		echo "Creating apps/web/.env.local..."; \
+		mkdir -p apps/web && echo "NEXT_PUBLIC_APP_URL=http://localhost:3000" > apps/web/.env.local; \
+	fi
+	@if [ ! -f apps/ai-tools/.env.local ]; then \
+		echo "Creating apps/ai-tools/.env.local..."; \
+		mkdir -p apps/ai-tools && echo "NEXT_PUBLIC_APP_URL=http://localhost:3004" > apps/ai-tools/.env.local; \
+	fi
+	@echo "✅ Environment files created!"
+	@echo "📝 Edit the files to add your API keys and configuration"
+	@echo "📚 See ENVIRONMENT_SETUP_GUIDE.md for detailed instructions"
+
+quick-start: setup-env install build dev ## Quick start: setup env, install, build, and run development environment
 	@echo ""
 	@echo "🎉 Nexus Platform is ready!"
 	@echo "=================================="
