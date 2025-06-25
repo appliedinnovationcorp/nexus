@@ -1,7 +1,7 @@
-# Turbonexus CI/CD Pipeline
+# Nexus CI/CD Pipeline
 # Optimized for monorepo with Turbo, Next.js apps, and shared packages
 
-name: Turbonexus CI/CD
+name: Nexus CI/CD
 
 on:
   push:

@@ -1,6 +1,6 @@
 # 🔐 CI/CD Secrets Setup Guide
 
-This guide will help you set up all required secrets for your Turbonexus CI/CD pipeline.
+This guide will help you set up all required secrets for your Nexus CI/CD pipeline.
 
 ## 🚀 Quick Setup Commands
 
